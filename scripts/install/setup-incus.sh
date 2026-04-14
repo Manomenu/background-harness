@@ -30,4 +30,4 @@ else
     incus admin init --minimal
 fi
 
-done "$STEP"
+finish "$STEP"

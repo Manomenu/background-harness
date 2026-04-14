@@ -6,7 +6,7 @@ set -euo pipefail
 
 log()  { echo "[${1}] ${2}"; }
 ok()   { log "${1}" "already installed, skipping"; }
-done() { log "${1}" "done"; }
+finish() { log "${1}" "done"; }
 
 # Returns 0 if command exists on PATH
 has() { command -v "$1" &>/dev/null; }
