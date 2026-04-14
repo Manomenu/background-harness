@@ -9,29 +9,7 @@ if has incus; then
     ok "$STEP/install"
 else
     log "$STEP" "installing..."
-    . /etc/os-release
-    case "$ID" in
-        ubuntu|debian)
-            sudo mkdir -p /etc/apt/keyrings
-            curl -fsSL https://pkgs.zabbly.com/key.asc \
-                | sudo gpg --dearmor -o /etc/apt/keyrings/zabbly.gpg
-
-            ARCH="$(dpkg --print-architecture)"
-            REPO="https://pkgs.zabbly.com/incus/stable"
-            echo "deb [arch=${ARCH} signed-by=/etc/apt/keyrings/zabbly.gpg] ${REPO} ${VERSION_CODENAME} main" \
-                | sudo tee /etc/apt/sources.list.d/zabbly-incus-stable.list
-
-            sudo apt-get update -q
-            sudo apt-get install -y incus
-            ;;
-        fedora|rhel|centos)
-            sudo dnf install -y incus
-            ;;
-        *)
-            echo "[${STEP}] unsupported distro: ${ID}" >&2
-            exit 1
-            ;;
-    esac
+    brew install incus
     log "$STEP" "installed: $(incus --version)"
 fi
 
