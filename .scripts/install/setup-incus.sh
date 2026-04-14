@@ -29,7 +29,7 @@ if incus storage list 2>/dev/null | grep -q "default"; then
     ok "$STEP/init"
 else
     log "$STEP" "running initial setup..."
-    incus admin init --minimal &>/dev/null
+    incus admin init --minimal #&>/dev/null
 fi
 
 finish "$STEP"
