@@ -4,12 +4,14 @@ source "$(dirname "$0")/_lib.sh"
 
 STEP="incus"
 
-# --- install binary ---
+# --- install ---
 if has incus; then
     ok "$STEP/install"
 else
     log "$STEP" "installing..."
-    brew install incus
+    sudo add-apt-repository -y universe &>/dev/null
+    sudo apt-get update -q &>/dev/null
+    sudo apt-get install -y incus &>/dev/null
     log "$STEP" "installed: $(incus --version)"
 fi
 
@@ -27,7 +29,7 @@ if incus storage list 2>/dev/null | grep -q "default"; then
     ok "$STEP/init"
 else
     log "$STEP" "running initial setup..."
-    incus admin init --minimal
+    incus admin init --minimal &>/dev/null
 fi
 
 finish "$STEP"
