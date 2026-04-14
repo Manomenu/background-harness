@@ -13,3 +13,6 @@ has() { command -v "$1" &>/dev/null; }
 
 # Returns 0 if the user is already in the given group
 in_group() { groups "$USER" | grep -qw "$1"; }
+
+# Load Homebrew into PATH (Linux)
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
